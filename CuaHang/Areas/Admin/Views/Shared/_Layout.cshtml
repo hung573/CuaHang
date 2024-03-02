@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="~/Areas/Admin/Views/Shared/_Layout.cshtml">
+            Trang Chu
+        </a>
+    </nav>
+    <div class="row">
+        <div class="col-md-1">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","Accounts")">
+                        Trang Chu
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","Products")">
+                        Quan Ly San Pham
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","ImageProducts")">
+                        Quan Ly Hinh Anh San Pham
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","Categories")">
+                        Quan Ly Loai
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","Brands")">
+                        Quan Ly Hang
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","Sliders")">
+                        Quang Ly Slider
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","KhanhHangs")">
+                        Quang Ly KhachHang
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","DonDatHangs")">
+                        Don Dat Hang
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("Index","ChiTietDonHangs")">
+                        Chi Tiet Don Hang
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="navbar-link" href="@Url.Action("DangNhap","Accounts")">
+                        Dang Xuat
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-11">
+            @RenderBody()
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

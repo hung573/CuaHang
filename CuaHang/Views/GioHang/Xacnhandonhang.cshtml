@@ -1,0 +1,27 @@
+﻿@using CuaHang.Models
+@model  CuaHang.Models.GioHang 
+@{
+    DBContext db = new DBContext();
+    ViewBag.Title = "Xacnhandonhang";
+    Layout = "~/Views/Shared/_LayoutGioHang.cshtml";
+}
+
+<div class="fs_menu_overlay"></div>
+<div class="container single_product_container">
+    <div class="row">
+        <div class="col">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <h4 style="text-align:center">Đơn hàng của quý khách đã được chúng tôi ghi nhận. Chúng tôi sẽ liên hệ quý khách trong thời gian sớm nhất và giao hẹn đúng hẹn</h4>
+                <br>
+
+            </div>
+            <p >
+                @Html.ActionLink("Về trang chủ", "Index", "Home")
+            </p>
+        </div>
+    </div>
+</div>
+

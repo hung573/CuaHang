@@ -1,0 +1,214 @@
+﻿@using CuaHang.Models
+@{
+    ViewBag.Title = "Home Page";
+    DBContext db = new DBContext();
+    var SiiderImage = db.Slider.Where(x => x.IsShow == false).Take(1).ToList();
+    var brandlist = db.Brand.Where(x => x.IsDeleted == false).Take(3).ToList();
+    var productlist = db.Product.Where(x => x.IsDeleted == false).Take(10).ToList();
+    var categorylist = db.Category.Where(x => x.IsDeleted == false).ToList();
+    var ontopProduct = db.Product.Where(x => x.IsDeleted == false && x.OnTop == true).Take(10).ToList();
+    var sellerProduct = db.Product.Where(x => x.IsDeleted == false && x.IsSeller == true).Take(10).ToList();
+    string formatMoney(int? money)
+    {
+        var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+        return money.Value.ToString("#,###", info.NumberFormat);
+    }
+}
+
+<!-- Slider -->
+@foreach (var item in SiiderImage)
+{
+    <div class="main_slider" style="background-image:url(@item.Image)">
+        <div class="container fill_height">
+            <div class="row align-items-center fill_height">
+                <div class="col">
+                    <div class="main_slider_content">
+                        <h6>Spring / Summer Collection 2017</h6>
+                        <h1>Get up to 30% Off New Arrivals</h1>
+                        <div class="red_button shop_now_button"><a href="#">shop now</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Banner -->
+
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in brandlist)
+            {
+                <a href="~/Home/Category?id=@item.ID"></a>
+                <div class="col-md-4">
+                    <div class="banner_item align-items-center" style="background-image:url(@item.Image)">
+                        <div class="banner_category">
+                            <a href="@Url.Action("Category", "Home", new {ID = item.ID})">@item.Name</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- New Arrivals -->
+
+<div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>New Arrivals</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
+                        @foreach (var item in categorylist)
+                        {
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".@item.ID">@item.Name</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+
+                    <!-- Product 1 -->
+                    @foreach (var item in ontopProduct)
+                    {
+                        <a href="~/Home/ChiTiet?id=@item.ID">
+                            <div class="product-item @item.ID">
+                                <div class="product discount product_filter">
+                                    <div class="product_image">
+                                        <img src="@item.Image" alt="">
+                                    </div>
+                                    <div class="favorite favorite_left"></div>
+                                    <div class="product_info">
+                                        <h6 class="product_name"><a href="single.html">@item.Name</a></h6>
+                                        <div class="product_price">$@formatMoney(item.Cost)<span>$590.00</span></div>
+                                    </div>
+                                </div>
+                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                            </div>
+                        </a>
+                       
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Best Sellers -->
+
+<div class="best_sellers">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Best Sellers</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product_slider_container">
+                    <div class="owl-carousel owl-theme product_slider">
+
+                        <!-- Slide 1 -->
+                        @foreach (var item in sellerProduct)
+                        {
+                         <a href="~/Home/ChiTiet?id=@item.ID">
+                             <div class="owl-item product_slider_item">
+                                 <div class="product-item">
+                                     <div class="product discount">
+                                         <div class="product_image">
+                                             <img src="@item.Image" alt="">
+                                         </div>
+                                         <div class="favorite favorite_left"></div>
+                                         <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                         <div class="product_info">
+                                             <h6 class="product_name"><a href="single.html">@item.Name</a></h6>
+                                             <div class="product_price">$@formatMoney(item.Cost)<span>$590.00</span></div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                           </a>
+                         }
+</div>
+                    <!-- Slider Navigation -->
+
+                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Arrivals -->
+
+<div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Danh Sach San Pham</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                        @foreach (var item in categorylist)
+                        {
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".@item.ID">@item.Name</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+
+                    <!-- Product 1 -->
+
+                    @foreach (var item in productlist)
+                    {
+                        <a href="~/Home/ChiTiet?id=@item.ID">
+                            <div class="product-item @item.ID">
+                                <div class="product discount product_filter">
+                                    <div class="product_image">
+                                        <img src="@item.Image" alt="">
+                                    </div>
+                                    <div class="favorite favorite_left"></div>
+
+                                    <div class="product_info">
+                                        <h6 class="product_name"><a href="single.html">@item.Name</a></h6>
+                                        <div class="product_price">$@formatMoney(item.Cost)<span>$590.00</span></div>
+                                    </div>
+                                </div>
+                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                            </div>
+                        </a>
+                     }
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CuaHang.Models.DonDatHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KhanhHang.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DaThanhToan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tinhtranggiaohang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ngaydat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ngaygiao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhanhHang.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DaThanhToan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tinhtranggiaohang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ngaydat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ngaygiao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaDonHang }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaDonHang }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaDonHang })
+        </td>
+    </tr>
+}
+
+</table>
